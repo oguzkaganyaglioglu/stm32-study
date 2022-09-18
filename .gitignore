@@ -1,0 +1,10 @@
+#Clion project files
+**/.idea/
+
+#Eclipse project files
+.cproject
+.project
+.settings/
+
+#Project builds
+**/.cmake-build-debug/
