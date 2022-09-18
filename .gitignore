@@ -7,4 +7,7 @@
 .settings/
 
 #Project builds
-**/.cmake-build-debug/
+**/cmake-build-*/
+
+[Rr]elease
+[Dd]ebug
