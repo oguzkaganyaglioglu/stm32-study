@@ -177,11 +177,11 @@ typedef struct {
 /*
  * GPIOx peripheral reset macros
  * */
-#define GPIOA_REG_RST()       do{(RCC->APB2RSTR |= (1 << 2)); RCC->APB2RSTR &= ~(1 << 2));} while(false)
-#define GPIOB_REG_RST()       do{(RCC->APB2RSTR |= (1 << 3)); RCC->APB2RSTR &= ~(1 << 3));} while(false)
-#define GPIOC_REG_RST()       do{(RCC->APB2RSTR |= (1 << 4)); RCC->APB2RSTR &= ~(1 << 4));} while(false)
-#define GPIOD_REG_RST()       do{(RCC->APB2RSTR |= (1 << 5)); RCC->APB2RSTR &= ~(1 << 5));} while(false)
-#define GPIOE_REG_RST()       do{(RCC->APB2RSTR |= (1 << 6)); RCC->APB2RSTR &= ~(1 << 6));} while(false)
+#define GPIOA_REG_RST()       do{(RCC->APB2RSTR |= (1 << 2)); (RCC->APB2RSTR &= ~(1 << 2));} while(false)
+#define GPIOB_REG_RST()       do{(RCC->APB2RSTR |= (1 << 3)); (RCC->APB2RSTR &= ~(1 << 3));} while(false)
+#define GPIOC_REG_RST()       do{(RCC->APB2RSTR |= (1 << 4)); (RCC->APB2RSTR &= ~(1 << 4));} while(false)
+#define GPIOD_REG_RST()       do{(RCC->APB2RSTR |= (1 << 5)); (RCC->APB2RSTR &= ~(1 << 5));} while(false)
+#define GPIOE_REG_RST()       do{(RCC->APB2RSTR |= (1 << 6)); (RCC->APB2RSTR &= ~(1 << 6));} while(false)
 
 
 /*
