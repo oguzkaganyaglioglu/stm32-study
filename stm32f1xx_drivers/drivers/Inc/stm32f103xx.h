@@ -6,30 +6,30 @@
 #ifndef STM32F1XX_DRIVERS_STM32F103XX_H
 #define STM32F1XX_DRIVERS_STM32F103XX_H
 
-#include <stdint.h>
+#include <cstdint>
 
 /**
  * base addresses of Flash and SRAM memories
  */
 
-#define FLASH_BASE_ADDR          0x08000000UL
-#define SRAM1_BASE_ADDR          0x20000000UL
-#define ROM_BASE_ADDR            0x1FFFF000UL
+#define FLASH_BASE_ADDR             0x08000000UL
+#define SRAM1_BASE_ADDR             0x20000000UL
+#define ROM_BASE_ADDR               0x1FFFF000UL
 #define SRAM                        SRAM1_BASE_ADDR
 
 /**
  * AHBx and APBx Bus Peripheral base addresses
  * */
 
-#define PERIPHERAL_BASE_ADDR     0x40000000UL
-#define APB1_BASE_ADDR           PERIPHERAL_BASE_ADDR
-#define APB2_BASE_ADDR           0x40010000UL
-#define AHB_BASE_ADDR            0x40018000UL
-#define AHB1_BASE_ADDR           AHB_BASE_ADDR
+#define PERIPHERAL_BASE_ADDR        0x40000000UL
+#define APB1_BASE_ADDR              PERIPHERAL_BASE_ADDR
+#define APB2_BASE_ADDR              0x40010000UL
+#define AHB_BASE_ADDR               0x40018000UL
+#define AHB1_BASE_ADDR              AHB_BASE_ADDR
 
-#define AHB_ADD_OFFSET(OFFSET)  (AHB_BASE_ADDR + (OFFSET))
-#define APB1_ADD_OFFSET(OFFSET) (APB1_BASE_ADDR + (OFFSET))
-#define APB2_ADD_OFFSET(OFFSET) (APB2_BASE_ADDR + (OFFSET))
+#define AHB_ADD_OFFSET(OFFSET)      (AHB_BASE_ADDR + (OFFSET))
+#define APB1_ADD_OFFSET(OFFSET)     (APB1_BASE_ADDR + (OFFSET))
+#define APB2_ADD_OFFSET(OFFSET)     (APB2_BASE_ADDR + (OFFSET))
 
 /**
  * Base addresses of peripherals which are hanging on AHB bus
@@ -48,65 +48,65 @@
  * Base addresses of peripherals which are hanging on APB1 bus
  * */
 
-#define I2C1_BASE_ADDR           APB1_ADD_OFFSET(0x5400UL)
-#define I2C2_BASE_ADDR           APB1_ADD_OFFSET(0x5800UL)
+#define I2C1_BASE_ADDR                       APB1_ADD_OFFSET(0x5400UL)
+#define I2C2_BASE_ADDR                       APB1_ADD_OFFSET(0x5800UL)
 
-#define SPI2_BASE_ADDR           APB1_ADD_OFFSET(0x3800UL)
-//#define SPI3_BASE_ADDR           APB1_ADD_OFFSET(0x3C00UL)
+#define SPI2_BASE_ADDR                       APB1_ADD_OFFSET(0x3800UL)
+//#define SPI3_BASE_ADDR                     APB1_ADD_OFFSET(0x3C00UL)
 
-#define USART2_BASE_ADDR         APB1_ADD_OFFSET(0x4400UL)
-#define USART3_BASE_ADDR         APB1_ADD_OFFSET(0x4800UL)
+#define USART2_BASE_ADDR                     APB1_ADD_OFFSET(0x4400UL)
+#define USART3_BASE_ADDR                     APB1_ADD_OFFSET(0x4800UL)
 
-//#define UART4_BASE_ADDR          APB1_ADD_OFFSET(0x4C00UL)
-//#define UART5_BASE_ADDR          APB1_ADD_OFFSET(0x5000UL)
+//#define UART4_BASE_ADDR                    APB1_ADD_OFFSET(0x4C00UL)
+//#define UART5_BASE_ADDR                    APB1_ADD_OFFSET(0x5000UL)
 
-#define TIM2_BASE_ADDR           APB1_ADD_OFFSET(0x0000UL)
-#define TIM3_BASE_ADDR           APB1_ADD_OFFSET(0x0400UL)
-#define TIM4_BASE_ADDR           APB1_ADD_OFFSET(0x0800UL)
-//#define TIM5_BASE_ADDR           APB1_ADD_OFFSET(0x0C00UL)
-//#define TIM6_BASE_ADDR           APB1_ADD_OFFSET(0x1000UL)
-//#define TIM7_BASE_ADDR           APB1_ADD_OFFSET(0x1400UL)
-//#define TIM12_BASE_ADDR          APB1_ADD_OFFSET(0x1800UL)
-//#define TIM13_BASE_ADDR          APB1_ADD_OFFSET(0x1C00UL)
-//#define TIM14_BASE_ADDR          APB1_ADD_OFFSET(0x2000UL)
+#define TIM2_BASE_ADDR                       APB1_ADD_OFFSET(0x0000UL)
+#define TIM3_BASE_ADDR                       APB1_ADD_OFFSET(0x0400UL)
+#define TIM4_BASE_ADDR                       APB1_ADD_OFFSET(0x0800UL)
+//#define TIM5_BASE_ADDR                     APB1_ADD_OFFSET(0x0C00UL)
+//#define TIM6_BASE_ADDR                     APB1_ADD_OFFSET(0x1000UL)
+//#define TIM7_BASE_ADDR                     APB1_ADD_OFFSET(0x1400UL)
+//#define TIM12_BASE_ADDR                    APB1_ADD_OFFSET(0x1800UL)
+//#define TIM13_BASE_ADDR                    APB1_ADD_OFFSET(0x1C00UL)
+//#define TIM14_BASE_ADDR                    APB1_ADD_OFFSET(0x2000UL)
 
-#define RTC_BASE_ADDR            APB1_ADD_OFFSET(0x2800UL)
+#define RTC_BASE_ADDR                        APB1_ADD_OFFSET(0x2800UL)
 
-#define WWDG_BASE_ADDR           APB1_ADD_OFFSET(0x2C00UL)
-#define IWDG_BASE_ADDR           APB1_ADD_OFFSET(0x3000UL)
+#define WWDG_BASE_ADDR                       APB1_ADD_OFFSET(0x2C00UL)
+#define IWDG_BASE_ADDR                       APB1_ADD_OFFSET(0x3000UL)
 
-#define PWR_BASE_ADDR            APB1_ADD_OFFSET(0x7000UL)
-#define DAC_BASE_ADDR            APB1_ADD_OFFSET(0x7400UL)
+#define PWR_BASE_ADDR                        APB1_ADD_OFFSET(0x7000UL)
+#define DAC_BASE_ADDR                        APB1_ADD_OFFSET(0x7400UL)
 
 /**
  * Base addresses of peripherals which are hanging on APB2 bus
  * */
 
-#define GPIOA_BASE_ADDR          APB2_ADD_OFFSET(0x0800UL)
-#define GPIOB_BASE_ADDR          APB2_ADD_OFFSET(0x0C00UL)
-#define GPIOC_BASE_ADDR          APB2_ADD_OFFSET(0x1000UL)
-#define GPIOD_BASE_ADDR          APB2_ADD_OFFSET(0x1400UL)
-#define GPIOE_BASE_ADDR          APB2_ADD_OFFSET(0x1800UL)
-//#define GPIOF_BASE_ADDR          APB2_ADD_OFFSET(0x1C00UL)
-//#define GPIOG_BASE_ADDR          APB2_ADD_OFFSET(0x2000UL)
+#define GPIOA_BASE_ADDR                      APB2_ADD_OFFSET(0x0800UL)
+#define GPIOB_BASE_ADDR                      APB2_ADD_OFFSET(0x0C00UL)
+#define GPIOC_BASE_ADDR                      APB2_ADD_OFFSET(0x1000UL)
+#define GPIOD_BASE_ADDR                      APB2_ADD_OFFSET(0x1400UL)
+#define GPIOE_BASE_ADDR                      APB2_ADD_OFFSET(0x1800UL)
+//#define GPIOF_BASE_ADDR                    APB2_ADD_OFFSET(0x1C00UL)
+//#define GPIOG_BASE_ADDR                    APB2_ADD_OFFSET(0x2000UL)
 
-#define SPI1_BASE_ADDR           APB2_ADD_OFFSET(0x3000UL)
+#define SPI1_BASE_ADDR                       APB2_ADD_OFFSET(0x3000UL)
 
-#define USART1_BASE_ADDR         APB2_ADD_OFFSET(0x3800UL)
+#define USART1_BASE_ADDR                     APB2_ADD_OFFSET(0x3800UL)
 
-#define ADC1_BASE_ADDR           APB2_ADD_OFFSET(0x2400UL)
-#define ADC2_BASE_ADDR           APB2_ADD_OFFSET(0x2800UL)
-#define ADC3_BASE_ADDR           APB2_ADD_OFFSET(0x3C00UL)
+#define ADC1_BASE_ADDR                       APB2_ADD_OFFSET(0x2400UL)
+#define ADC2_BASE_ADDR                       APB2_ADD_OFFSET(0x2800UL)
+#define ADC3_BASE_ADDR                       APB2_ADD_OFFSET(0x3C00UL)
 
-#define TIM1_BASE_ADDR           APB2_ADD_OFFSET(0x2C00UL)
-//#define TIM8_BASE_ADDR           APB2_ADD_OFFSET(0x3400UL)
-//#define TIM9_BASE_ADDR           APB2_ADD_OFFSET(0x4C00UL)
-//#define TIM10_BASE_ADDR          APB2_ADD_OFFSET(0x5000UL)
-//#define TIM11_BASE_ADDR          APB2_ADD_OFFSET(0x5400UL)
+#define TIM1_BASE_ADDR                       APB2_ADD_OFFSET(0x2C00UL)
+//#define TIM8_BASE_ADDR                     APB2_ADD_OFFSET(0x3400UL)
+//#define TIM9_BASE_ADDR                     APB2_ADD_OFFSET(0x4C00UL)
+//#define TIM10_BASE_ADDR                    APB2_ADD_OFFSET(0x5000UL)
+//#define TIM11_BASE_ADDR                    APB2_ADD_OFFSET(0x5400UL)
 
-#define EXTI_BASE_ADDR           APB2_ADD_OFFSET(0x0400UL)
+#define EXTI_BASE_ADDR                       APB2_ADD_OFFSET(0x0400UL)
 
-#define AFIO_BASE_ADDR           APB2_ADD_OFFSET(0x0000UL)
+#define AFIO_BASE_ADDR                       APB2_ADD_OFFSET(0x0000UL)
 
 /*
  * ----------------------------------------------------------------
@@ -187,20 +187,20 @@ typedef struct {
 /*
  * Clock enable/disable macros for I2Cx peripherals
  * */
-#define I2C1_PCLK_EN()        (RCC->APB1ENR |= (1 << 21))
-#define I2C2_PCLK_EN()        (RCC->APB1ENR |= (1 << 22))
+#define I2C1_PCLK_EN()          (RCC->APB1ENR |= (1 << 21))
+#define I2C2_PCLK_EN()          (RCC->APB1ENR |= (1 << 22))
 
-#define I2C1_PCLK_DI()        (RCC->APB1ENR &= ~(1 << 21))
-#define I2C2_PCLK_DI()        (RCC->APB1ENR &= ~(1 << 22))
+#define I2C1_PCLK_DI()          (RCC->APB1ENR &= ~(1 << 21))
+#define I2C2_PCLK_DI()          (RCC->APB1ENR &= ~(1 << 22))
 
 /*
  * Clock enable/disable macros for SPIx peripherals
  * */
-#define SPI1_PCLK_EN()        (RCC->APB2ENR |= (1 << 12))
-#define SPI2_PCLK_EN()        (RCC->APB1ENR |= (1 << 14))
+#define SPI1_PCLK_EN()          (RCC->APB2ENR |= (1 << 12))
+#define SPI2_PCLK_EN()          (RCC->APB1ENR |= (1 << 14))
 
-#define SPI1_PCLK_DI()        (RCC->APB2ENR &= ~(1 << 12))
-#define SPI2_PCLK_DI()        (RCC->APB1ENR &= ~(1 << 14))
+#define SPI1_PCLK_DI()          (RCC->APB2ENR &= ~(1 << 12))
+#define SPI2_PCLK_DI()          (RCC->APB1ENR &= ~(1 << 14))
 
 /*
  * Clock enable/disable macros for USARTx peripherals
@@ -214,11 +214,11 @@ typedef struct {
 #define USART3_PCLK_DI()        (RCC->APB1ENR &= ~(1 << 18))
 
 // some generic macros
-#define ENABLE 1
-#define DISABLE 0
-#define SET ENABLE
-#define RESET DISABLE
-#define GPIO_PIN_SET SET
-#define GPIO_PIN_RESET RESET
+#define ENABLE                  1
+#define DISABLE                 0
+#define SET                     ENABLE
+#define RESET                   DISABLE
+#define GPIO_PIN_SET            SET
+#define GPIO_PIN_RESET          RESET
 
 #endif //STM32F1XX_DRIVERS_STM32F103XX_H
