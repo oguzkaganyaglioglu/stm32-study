@@ -6,7 +6,8 @@
 #ifndef STM32F1XX_DRIVERS_STM32F103XX_H
 #define STM32F1XX_DRIVERS_STM32F103XX_H
 
-#include <cstdint>
+#include <stdint.h>
+#include <stdbool.h>
 
 /**
  * base addresses of Flash and SRAM memories
@@ -220,5 +221,7 @@ typedef struct {
 #define RESET                   DISABLE
 #define GPIO_PIN_SET            SET
 #define GPIO_PIN_RESET          RESET
+
+#include "stm32f103xx_gpio_driver.h"
 
 #endif //STM32F1XX_DRIVERS_STM32F103XX_H
