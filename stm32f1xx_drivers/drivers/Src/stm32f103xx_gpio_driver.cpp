@@ -42,31 +42,45 @@ void GPIO_DeInit(GPIO_RegDef_t *GPIOx) {
     else if (GPIOx == GPIOE) GPIOE_REG_RST();
 }
 
-void GPIO_PeriClockControl(GPIO_RegDef_t *GPIOx, bool EnOrDi) {
+void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, bool EnOrDi) {
     if (EnOrDi) {
-        if (GPIOx == GPIOA) GPIOA_PCLK_EN();
-        else if (GPIOx == GPIOB) GPIOB_PCLK_EN();
-        else if (GPIOx == GPIOC) GPIOC_PCLK_EN();
-        else if (GPIOx == GPIOD) GPIOD_PCLK_EN();
-        else if (GPIOx == GPIOE) GPIOE_PCLK_EN();
+        if (pGPIOx == GPIOA) GPIOA_PCLK_EN();
+        else if (pGPIOx == GPIOB) GPIOB_PCLK_EN();
+        else if (pGPIOx == GPIOC) GPIOC_PCLK_EN();
+        else if (pGPIOx == GPIOD) GPIOD_PCLK_EN();
+        else if (pGPIOx == GPIOE) GPIOE_PCLK_EN();
     } else {
-        if (GPIOx == GPIOA) GPIOA_PCLK_DI();
-        else if (GPIOx == GPIOB) GPIOB_PCLK_DI();
-        else if (GPIOx == GPIOC) GPIOC_PCLK_DI();
-        else if (GPIOx == GPIOD) GPIOD_PCLK_DI();
-        else if (GPIOx == GPIOE) GPIOE_PCLK_DI();
+        if (pGPIOx == GPIOA) GPIOA_PCLK_DI();
+        else if (pGPIOx == GPIOB) GPIOB_PCLK_DI();
+        else if (pGPIOx == GPIOC) GPIOC_PCLK_DI();
+        else if (pGPIOx == GPIOD) GPIOD_PCLK_DI();
+        else if (pGPIOx == GPIOE) GPIOE_PCLK_DI();
     }
 }
 
-bool GPIO_ReadFromInputPin(GPIO_RegDef_t *GPIOx, uint8_t PinNumber);
+bool GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber) {
+    return (pGPIOx->IDR >> PinNumber) & 1;
+}
 
-uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *GPIOx);
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx) {
+    return (uint16_t) (pGPIOx->IDR);
+}
 
-void GPIO_WriteToOutputPin(GPIO_RegDef_t *GPIOx, uint8_t PinNumber, bool Value);
+void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, bool Value) {
+    if (Value == GPIO_PIN_SET) {
+        pGPIOx->ODR |= (1 << PinNumber);
+    } else {
+        pGPIOx->ODR &= ~(1 << PinNumber);
+    }
+}
 
-void GPIO_WriteToOutputPort(GPIO_RegDef_t *GPIOx, uint16_t Value);
+void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value) {
+    pGPIOx->ODR = Value;
+}
 
-void GPIO_ToggleOutputPin(GPIO_RegDef_t *GPIOx, uint8_t PinNumber);
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber) {
+    pGPIOx->ODR ^= (1 << PinNumber);
+}
 
 void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, bool EnOrDi);
 

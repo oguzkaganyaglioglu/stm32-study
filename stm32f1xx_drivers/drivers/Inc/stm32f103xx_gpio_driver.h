@@ -106,24 +106,84 @@ void GPIO_DeInit(GPIO_RegDef_t *GPIOx);
  *
  * @brief       This function enables or disables peripheral clock for the given GPIO port
  *
- * @param[in]   GPIOx   base address of the GPIO peripheral
- * @param[in]   EnOrDi  ENABLE or DISABLE macros
+ * @param[in]   pGPIOx   base address of the GPIO peripheral
+ * @param[in]   EnOrDi   ENABLE or DISABLE macros
  *
  * @return      none
  *
  * @note        none
  * */
-void GPIO_PeriClockControl(GPIO_RegDef_t *GPIOx, bool EnOrDi);
+void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, bool EnOrDi);
 
-bool GPIO_ReadFromInputPin(GPIO_RegDef_t *GPIOx, uint8_t PinNumber);
+/**
+ * @fn          GPIO_ReadFromInputPin
+ *
+ * @brief       This function reads the value from a specified GPIO pin
+ *
+ * @param[in]   pGPIOx      base address of the GPIO peripheral
+ * @param[in]   PinNumber   pin number, possible values from @GPIO_PIN_NUMBERS
+ *
+ * @return      GPIO pin value: true (HIGH) or false (LOW)
+ *
+ * @note        none
+ * */
+bool GPIO_ReadFromInputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
-uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *GPIOx);
+/**
+ * @fn          GPIO_ReadFromInputPort
+ *
+ * @brief       This function reads the value from a specified GPIO port
+ *
+ * @param[in]   pGPIOx      base address of the GPIO peripheral
+ *
+ * @return      GPIO port value: uint16_t
+ *
+ * @note        none
+ * */
+uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx);
 
-void GPIO_WriteToOutputPin(GPIO_RegDef_t *GPIOx, uint8_t PinNumber, bool Value);
+/**
+ * @fn          GPIO_WriteToOutputPin
+ *
+ * @brief       This function writes a value to the specified GPIO pin
+ *
+ * @param[in]   pGPIOx      base address of the GPIO peripheral
+ * @param[in]   PinNumber   pin number, possible values from @GPIO_PIN_NUMBERS
+ * @param[in]   Value       true: HIGH, false: LOW
+ *
+ * @return      none
+ *
+ * @note        if the pin is configured as INPUT; value(true) enable pull-up resistor, value(false) enable pull-down resistor
+ * */
+void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, bool Value);
 
-void GPIO_WriteToOutputPort(GPIO_RegDef_t *GPIOx, uint16_t Value);
+/**
+ * @fn          GPIO_WriteToOutputPort
+ *
+ * @brief       This function writes the value to the specified GPIO port
+ *
+ * @param[in]   pGPIOx      base address of the GPIO peripheral
+ * @param[in]   Value       value to be written to the GPIO port. 1:HIGH, 0:LOW
+ *
+ * @return      none
+ *
+ * @note        if a pin is configured as INPUT; 1 enable pull-up resistor, 0 enable pull-down resistor
+ * */
+void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value);
 
-void GPIO_ToggleOutputPin(GPIO_RegDef_t *GPIOx, uint8_t PinNumber);
+/**
+ * @fn          GPIO_ToggleOutputPin
+ *
+ * @brief       This function toggles the specified GPIO pin
+ *
+ * @param[in]   pGPIOx      base address of the GPIO peripheral
+ * @param[in]   PinNumber   pin number, possible values from @GPIO_PIN_NUMBERS
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
 void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, bool EnOrDi);
 
