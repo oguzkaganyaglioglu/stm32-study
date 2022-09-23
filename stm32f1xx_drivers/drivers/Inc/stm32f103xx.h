@@ -215,12 +215,15 @@ typedef struct {
 #define USART3_PCLK_DI()        (RCC->APB1ENR &= ~(1 << 18))
 
 // some generic macros
-#define ENABLE                  1
-#define DISABLE                 0
-#define SET                     ENABLE
-#define RESET                   DISABLE
-#define GPIO_PIN_SET            SET
-#define GPIO_PIN_RESET          RESET
+#define ENABLE                      1
+#define DISABLE                     0
+#define SET                         ENABLE
+#define RESET                       DISABLE
+#define GPIO_PIN_SET                SET
+#define GPIO_PIN_RESET              RESET
+
+#define GPIO_OUT_INVERTED           1  // 1 => GPIO_PIN_SET: LOW, GPIO_PIN_RESET: HIGH ; 0 => GPIO_PIN_SET: HIGH, GPIO_PIN_RESET: LOW
+#define GPIO_INVERT_IF_NEEDED(x)    (x^GPIO_OUT_INVERTED) // make sure GPIO_PIN_SET is HIGH, GPIO_PIN_RESET is LOW
 
 #include "stm32f103xx_gpio_driver.h"
 
