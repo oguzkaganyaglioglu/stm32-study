@@ -12,16 +12,19 @@
 /**
  * @GPIO_PIN_MODES
  * */
-#define GPIO_MODE_OUT_MAX_SPEED_2MHZ     0b10
-#define GPIO_MODE_OUT_MAX_SPEED_10MHZ    0b01
-#define GPIO_MODE_OUT_MAX_SPEED_50MHZ    0b11
+#define GPIO_MODE_OUT_MAX_SPEED_2MHZ        0b10
+#define GPIO_MODE_OUT_MAX_SPEED_10MHZ       0b01
+#define GPIO_MODE_OUT_MAX_SPEED_50MHZ       0b11
 
 #define GPIO_MODE_IN                        0b00
 #define GPIO_MODE_OUT                       GPIO_MODE_OUT_MAX_SPEED_10MHZ
 
-//#define GPIO_MODE_IT_FT                     0b100 // Interrupt trigger falling edge
-//#define GPIO_MODE_IT_RT                     0b101 // Interrupt trigger rising edge
-//#define GPIO_MODE_IT_RFT                    0b110 // Interrupt trigger falling and rising edge
+/**
+ * @GPIO_PIN_IRQ
+ * */
+#define GPIO_IRQ_FT                         0b100 // Interrupt trigger falling edge
+#define GPIO_IRQ_RT                         0b010 // Interrupt trigger rising edge
+#define GPIO_IRQ_RFT                        0b110 // Interrupt trigger falling and rising edge
 
 /**
  * @GPIO_PIN_CNF
@@ -64,6 +67,7 @@ typedef struct {
     uint8_t GPIO_PinNumber;                 /** possible values from @GPIO_PIN_NUMBERS */
     uint8_t GPIO_PinMode;                   /** possible values values from @GPIO_PIN_MODES */
     uint8_t GPIO_PinCNF;                    /** possible values values from @GPIO_PIN_CNF */
+    uint8_t GPIO_PinIRQ_TRIG;                    /** possible values values from @GPIO_PIN_IRQ */
     bool GPIO_PinPuPdControl;
 //    uint8_t GPIO_PinAltFuncMode;
 } GPIO_PinConfig_t;
@@ -185,8 +189,45 @@ void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value);
  * */
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, bool EnOrDi);
+/**
+ * @fn          GPIO_IRQConfig
+ *
+ * @brief       This function configures the specified IRQ
+ *
+ * @param[in]   IRQNumber   irq number, possible values from @IRQ_NUMBERS
+ * @param[in]   EnOrDi      ENABLE or DISABLE macros
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void GPIO_IRQConfig(uint8_t IRQNumber, bool EnOrDi);
 
+/**
+ * @fn          GPIO_IRQSetPriority
+ *
+ * @brief       This function sets the priority of the specified IRQ
+ *
+ * @param[in]   IRQNumber    irq number, possible values from @IRQ_NUMBERS
+ * @param[in]   IRQPriority  irq priority, possible values from @IRQ_PRIORITES
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void GPIO_IRQSetPriority(uint8_t IRQNumber, uint32_t IRQPriority);
+
+/**
+ * @fn          GPIO_IRQSetPriority
+ *
+ * @brief       This function sets the priority of the specified IRQ
+ *
+ * @param[in]   PinNumber    pin number, possible values from @GPIO_PIN_NUMBERS
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
 void GPIO_IRQHandling(uint8_t PinNumber);
 
 
