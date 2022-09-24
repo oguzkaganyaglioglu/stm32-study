@@ -9,6 +9,71 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+/*
+ * ----------------------------------------------------------------
+ * Peripheral register definition structures
+ * ----------------------------------------------------------------
+ * */
+
+/**
+ * ARM Cortex-Mx Processor NVIC ISERx register addresses
+ * */
+#define NVIC_ISER_0                 ((volatile uint32_t *)0xE000E100)
+#define NVIC_ISER_1                 ((volatile uint32_t *)0xE000E104)
+#define NVIC_ISER_2                 ((volatile uint32_t *)0xE000E108)
+#define NVIC_ISER_3                 ((volatile uint32_t *)0xE000E10C)
+#define NVIC_ISER_4                 ((volatile uint32_t *)0xE000E110)
+#define NVIC_ISER_5                 ((volatile uint32_t *)0xE000E114)
+#define NVIC_ISER_6                 ((volatile uint32_t *)0xE000E118)
+#define NVIC_ISER_7                 ((volatile uint32_t *)0xE000E11C)
+
+/**
+ * ARM Cortex-Mx Processor NVIC ICERx register addresses
+ * */
+#define NVIC_ICER_0                 ((volatile uint32_t *) 0XE000E180)
+#define NVIC_ICER_1                 ((volatile uint32_t *) 0XE000E184)
+#define NVIC_ICER_2                 ((volatile uint32_t *) 0XE000E188)
+#define NVIC_ICER_3                 ((volatile uint32_t *) 0XE000E18C)
+#define NVIC_ICER_4                 ((volatile uint32_t *) 0XE000E190)
+#define NVIC_ICER_5                 ((volatile uint32_t *) 0XE000E194)
+#define NVIC_ICER_6                 ((volatile uint32_t *) 0XE000E198)
+#define NVIC_ICER_7                 ((volatile uint32_t *) 0XE000E19C)
+
+/**
+ * ARM Cortex-Mx Processor NVIC PR register addresses
+ * */
+#define NVIC_IPR_BASE_ADDR          ((volatile uint32_t *) 0xE000E400)
+
+/**
+ * Arm Cortex-Mx Processor number of priority bits implemented in Interrupt Priority Register
+ * */
+#define NO_IPR_BITS_IMPLEMENTED     4
+
+/**
+ * register definition structure for the NVIC ISER
+ * */
+typedef struct {
+    volatile uint32_t REG_NUM[8];
+} NVIC_ISER_RegDef_t;
+
+/**
+ * register definition structure for the NVIC ICER
+ * */
+typedef struct {
+    volatile uint32_t REG_NUM[8];
+} NVIC_ICER_RegDef_t;
+
+/**
+ * register definition for the NVIC ISER
+ * */
+#define NVIC_ISER  ((NVIC_ISER_RegDef_t *) NVIC_ISER_0)
+
+/**
+ * register definition for the NVIC ICER
+ * */
+#define NVIC_ICER  ((NVIC_ICER_RegDef_t *) NVIC_ICER_0)
+/* ---------------------------------------------------------------- */
+
 /**
  * base addresses of Flash and SRAM memories
  */
@@ -145,6 +210,28 @@ typedef struct {
     volatile uint32_t CFGR2;    // Clock configuration register2            Address offset 0x2C
 } RCC_RegDef_t;
 
+/**
+ * peripheral register definition structure for the EXTI
+ * */
+typedef struct {
+    volatile uint32_t IMR;       // Interrupt mask register                 Address offset 0x00
+    volatile uint32_t EMR;       // Event mask register                     Address offset 0x04
+    volatile uint32_t RTSR;      // Rising trigger selection register       Address offset 0x08
+    volatile uint32_t FTSR;      // Falling trigger selection register      Address offset 0x0C
+    volatile uint32_t SWIER;     // Software interrupt event register       Address offset 0x10
+    volatile uint32_t PR;        // Pending register                        Address offset 0x14
+} EXTI_RegDef_t;
+
+/**
+ * peripheral register definition structure for the AFIO
+ * */
+typedef struct {
+    volatile uint32_t EVCR;      // Event control register                              Address offset 0x00
+    volatile uint32_t MAPR;      // AF remap and debug I/O configuration register       Address offset 0x04
+    volatile uint32_t EXTICR[4]; // External interrupt configuration register 1-4       Address offset 0x08 - 0x14
+    volatile uint32_t MAPR2;     // AF remap and debug I/O configuration register2      Address offset 0x04
+} AFIO_RegDef_t;
+
 /*
  * Peripheral definitions
  * */
@@ -157,7 +244,17 @@ typedef struct {
 //#define GPIOF ((GPIO_RegDef_t *) GPIOF_BASE_ADDR)
 //#define GPIOG ((GPIO_RegDef_t *) GPIOG_BASE_ADDR)
 
-#define RCC ((RCC_RegDef_t *) RCC_BASE_ADDR)
+#define RCC   ((RCC_RegDef_t *) RCC_BASE_ADDR)
+#define EXTI  ((EXTI_RegDef_t *) EXTI_BASE_ADDR)
+#define AFIO  ((AFIO_RegDef_t *) AFIO_BASE_ADDR)
+
+/*
+ * Clock enable/disable macros for AFIO peripheral
+ * */
+#define AFIO_PCLK_EN()       (RCC->APB2ENR |= (1 << 0))
+
+#define AFIO_PCLK_DI()       (RCC->APB2ENR &= ~(1 << 0))
+
 
 /*
  * Clock enable/disable macros for GPIOx peripherals
@@ -184,6 +281,48 @@ typedef struct {
 #define GPIOD_REG_RST()       do{(RCC->APB2RSTR |= (1 << 5)); (RCC->APB2RSTR &= ~(1 << 5));} while(false)
 #define GPIOE_REG_RST()       do{(RCC->APB2RSTR |= (1 << 6)); (RCC->APB2RSTR &= ~(1 << 6));} while(false)
 
+
+/**
+ * returns gpio port code for the given GPIO base address
+ * */
+#define GPIO_BASEADDR_TO_PORTCODE(x)   ((x == GPIOA) ? 0b0000 : \
+                                        (x == GPIOB) ? 0b0001 : \
+                                        (x == GPIOC) ? 0b0010 : \
+                                        (x == GPIOD) ? 0b0011 : \
+                                        (x == GPIOE) ? 0b0100 : 0)
+
+/**
+ * @IRQ_NUMBERS
+ * IRQ(Interrupt Request) numbers
+ * */
+#define IRQ_NO_EXTI0            6
+#define IRQ_NO_EXTI1            7
+#define IRQ_NO_EXTI2            8
+#define IRQ_NO_EXTI3            9
+#define IRQ_NO_EXTI4            10
+#define IRQ_NO_EXTI9_5          23
+#define IRQ_NO_EXTI15_10        40
+
+/**
+ * @IRQ_PRIORITES
+ * IRQ(Interrupt Request) priorities
+ * */
+#define NVIC_IRQ_PRIORITY_0     0
+#define NVIC_IRQ_PRIORITY_1     1
+#define NVIC_IRQ_PRIORITY_2     2
+#define NVIC_IRQ_PRIORITY_3     3
+#define NVIC_IRQ_PRIORITY_4     4
+#define NVIC_IRQ_PRIORITY_5     5
+#define NVIC_IRQ_PRIORITY_6     6
+#define NVIC_IRQ_PRIORITY_7     7
+#define NVIC_IRQ_PRIORITY_8     8
+#define NVIC_IRQ_PRIORITY_9     9
+#define NVIC_IRQ_PRIORITY_10    10
+#define NVIC_IRQ_PRIORITY_11    11
+#define NVIC_IRQ_PRIORITY_12    12
+#define NVIC_IRQ_PRIORITY_13    13
+#define NVIC_IRQ_PRIORITY_14    14
+#define NVIC_IRQ_PRIORITY_15    15
 
 /*
  * Clock enable/disable macros for I2Cx peripherals
