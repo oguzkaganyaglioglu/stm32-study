@@ -12,6 +12,7 @@ This is a the hello world of the embedded systems. This projects blinks the on b
 ### led_button
 
 **This projects requires you to connect a button at the pin PC15.**
+<br/>
 If you push the button the led turns on until you release the button.
 
 ### button_irq
