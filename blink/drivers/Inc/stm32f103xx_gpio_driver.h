@@ -67,7 +67,7 @@ typedef struct {
     uint8_t GPIO_PinNumber;                 /** possible values from @GPIO_PIN_NUMBERS */
     uint8_t GPIO_PinMode;                   /** possible values values from @GPIO_PIN_MODES */
     uint8_t GPIO_PinCNF;                    /** possible values values from @GPIO_PIN_CNF */
-    uint8_t GPIO_PinIRQ_TRIG;                    /** possible values values from @GPIO_PIN_IRQ */
+    uint8_t GPIO_PinIRQ_TRIG;               /** possible values values from @GPIO_PIN_IRQ */
     bool GPIO_PinPuPdControl;
 //    uint8_t GPIO_PinAltFuncMode;
 } GPIO_PinConfig_t;
@@ -220,7 +220,7 @@ void GPIO_IRQSetPriority(uint8_t IRQNumber, uint32_t IRQPriority);
 /**
  * @fn          GPIO_IRQSetPriority
  *
- * @brief       This function sets the priority of the specified IRQ
+ * @brief       This function handles the triggered IRQ
  *
  * @param[in]   PinNumber    pin number, possible values from @GPIO_PIN_NUMBERS
  *
