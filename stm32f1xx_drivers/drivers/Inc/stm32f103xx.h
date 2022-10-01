@@ -386,5 +386,6 @@ typedef struct {
 #define GPIO_INVERT_IF_NEEDED(x)    (x^GPIO_OUT_INVERTED) // make sure GPIO_PIN_SET is HIGH, GPIO_PIN_RESET is LOW
 
 #include "stm32f103xx_gpio_driver.h"
+#include "stm32f103xx_spi_driver.h"
 
 #endif //STM32F1XX_DRIVERS_STM32F103XX_H
