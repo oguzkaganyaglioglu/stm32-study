@@ -118,7 +118,7 @@ typedef struct {
 #define I2C2_BASE_ADDR                       APB1_ADD_OFFSET(0x5800UL)
 
 #define SPI2_BASE_ADDR                       APB1_ADD_OFFSET(0x3800UL)
-//#define SPI3_BASE_ADDR                     APB1_ADD_OFFSET(0x3C00UL)
+#define SPI3_BASE_ADDR                       APB1_ADD_OFFSET(0x3C00UL)
 
 #define USART2_BASE_ADDR                     APB1_ADD_OFFSET(0x4400UL)
 #define USART3_BASE_ADDR                     APB1_ADD_OFFSET(0x4800UL)
@@ -265,6 +265,7 @@ typedef struct {
 #define AFIO  ((AFIO_RegDef_t *) AFIO_BASE_ADDR)
 #define SPI1  ((SPI_RegDef_t *) SPI1_BASE_ADDR)
 #define SPI2  ((SPI_RegDef_t *) SPI2_BASE_ADDR)
+#define SPI3  ((SPI_RegDef_t *) SPI3_BASE_ADDR)
 
 /*
  * Clock enable/disable macros for AFIO peripheral
@@ -356,9 +357,11 @@ typedef struct {
  * */
 #define SPI1_PCLK_EN()          (RCC->APB2ENR |= (1 << 12))
 #define SPI2_PCLK_EN()          (RCC->APB1ENR |= (1 << 14))
+#define SPI3_PCLK_EN()          (RCC->APB1ENR |= (1 << 15))
 
 #define SPI1_PCLK_DI()          (RCC->APB2ENR &= ~(1 << 12))
 #define SPI2_PCLK_DI()          (RCC->APB1ENR &= ~(1 << 14))
+#define SPI3_PCLK_DI()          (RCC->APB1ENR &= ~(1 << 15))
 
 /*
  * Clock enable/disable macros for USARTx peripherals
