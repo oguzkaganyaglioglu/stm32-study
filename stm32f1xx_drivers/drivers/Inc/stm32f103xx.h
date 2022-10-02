@@ -226,15 +226,15 @@ typedef struct {
  * peripheral register definition structure for the SPI
  * */
 typedef struct {
-    volatile uint32_t SPI_CR1;          // SPI control register 1          (not used in I2S mode)   Address offset 0x00
-    volatile uint32_t SPI_CR2;          // SPI control register 2                                   Address offset 0x04
-    volatile uint32_t SPI_SR;           // SPI status register                                      Address offset 0x08
-    volatile uint32_t SPI_DR;           // SPI data register                                        Address offset 0x0C
-    volatile uint32_t SPI_CRCPR;        // SPI CRC polynomial register     (not used in I2S mode)   Address offset 0x10
-    volatile uint32_t SPI_RXCRCR;       // SPI RX CRC register             (not used in I2S mode)   Address offset 0x14
-    volatile uint32_t SPI_TXCRCR;       // SPI TX CRC register             (not used in I2S mode)   Address offset 0x18
-    volatile uint32_t SPI_I2SCFGR;      // SPI_I2S configuration register                           Address offset 0x1C
-    volatile uint32_t SPI_I2SPR;        // SPI_I2S prescaler register                               Address offset 0x20
+    volatile uint32_t SPI_CR1;          // SPI control register 1           Address offset 0x00
+    volatile uint32_t SPI_CR2;          // SPI control register 2           Address offset 0x04
+    volatile uint32_t SPI_SR;           // SPI status register              Address offset 0x08
+    volatile uint32_t SPI_DR;           // SPI data register                Address offset 0x0C
+    volatile uint32_t SPI_CRCPR;        // SPI CRC polynomial register      Address offset 0x10
+    volatile uint32_t SPI_RXCRCR;       // SPI RX CRC register              Address offset 0x14
+    volatile uint32_t SPI_TXCRCR;       // SPI TX CRC register              Address offset 0x18
+    volatile uint32_t SPI_I2SCFGR;      // SPI_I2S configuration register   Address offset 0x1C
+    volatile uint32_t SPI_I2SPR;        // SPI_I2S prescaler register       Address offset 0x20
 } SPI_RegDef_t;
 
 
