@@ -78,4 +78,103 @@ typedef struct {
 #define SPI_SSM_EN          1
 #define SPI_SSM_DI          0
 
+/**
+ * @fn          SPI_Init
+ *
+ * @brief       This function initializes the given SPI peripheral
+ *
+ * @param[in]   pSPIHandle
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void SPI_Init(SPI_Handle_t *pSPIHandle);
+
+/**
+ * @fn          SPI_DeInit
+ *
+ * @brief       This function deinitializes the given SPI peripheral
+ *
+ * @param[in]   SPI_RegDef_t base address of the SPI peripheral for the given port
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void SPI_DeInit(SPI_RegDef_t *pSPIx);
+
+/**
+ * @fn          SPI_PeriControl
+ *
+ * @brief       This function enables or disables the given SPI peripheral
+ *
+ * @param[in]   pSPIx    base address of the SPI peripheral
+ * @param[in]   EnOrDi   ENABLE or DISABLE macros
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void SPI_PeriControl(SPI_RegDef_t *pSPIx, bool EnOrDi);
+
+/**
+ * @fn          SPI_PeriClockControl
+ *
+ * @brief       This function enables or disables peripheral clock for the given SPI peripheral
+ *
+ * @param[in]   pSPIx    base address of the SPI peripheral
+ * @param[in]   EnOrDi   ENABLE or DISABLE macros
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void SPI_PeriClockControl(SPI_RegDef_t *pSPIx, bool EnOrDi);
+
+/**
+ * @fn          SPI_SSIConfig
+ *
+ * @brief       This function enables or disables SSI for the given SPI peripheral
+ *
+ * @param[in]   pSPIx    base address of the SPI peripheral
+ * @param[in]   EnOrDi   ENABLE or DISABLE macros
+ *
+ * @return      none
+ *
+ * @note        none
+ * */
+void SPI_SSIConfig(SPI_RegDef_t *pSPIx, bool EnOrDi);
+
+
+/**
+ * @fn          SPI_SendData_blocking
+ *
+ * @brief       Sends len bytes from pTxBuffer
+ *
+ * @param[in]   pSPIx       base address of the SPI peripheral
+ * @param[in]   pTxBuffer   data buffer to send
+ * @param[in]   len         data buffer length
+ *
+ * @return      none
+ *
+ * @note        blocks until all data is transferred
+ * */
+void SPI_SendData_blocking(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t len);
+
+/**
+ * @fn          SPI_ReceiveData_blocking
+ *
+ * @brief       Reads len bytes from SPI to pRxBuffer
+ *
+ * @param[in]   pSPIx       base address of the SPI peripheral
+ * @param[in]   pRxBuffer   data buffer to write incoming data
+ * @param[in]   len         data buffer length
+ *
+ * @return      none
+ *
+ * @note        blocks until all data is transferred
+ * */
+void SPI_ReceiveData_blocking(SPI_RegDef_t *pSPIx, uint8_t *pRxBuffer, uint32_t len);
+
 #endif //STM32F1XX_DRIVERS_STM32F103XX_SPI_DRIVER_H
