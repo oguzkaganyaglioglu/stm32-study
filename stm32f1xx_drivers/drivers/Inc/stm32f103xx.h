@@ -300,6 +300,13 @@ typedef struct {
 #define GPIOD_REG_RST()       do{(RCC->APB2RSTR |= (1 << 5)); (RCC->APB2RSTR &= ~(1 << 5));} while(false)
 #define GPIOE_REG_RST()       do{(RCC->APB2RSTR |= (1 << 6)); (RCC->APB2RSTR &= ~(1 << 6));} while(false)
 
+/**
+ * SPIx peripheral reset macros
+ * */
+#define SPI1_REG_RST()       do{(RCC->APB2RSTR |= (1 << 12)); (RCC->APB2RSTR &= ~(1 << 12));} while(false)
+#define SPI2_REG_RST()       do{(RCC->APB1RSTR |= (1 << 14)); (RCC->APB1RSTR &= ~(1 << 14));} while(false)
+#define SPI3_REG_RST()       do{(RCC->APB1RSTR |= (1 << 15)); (RCC->APB1RSTR &= ~(1 << 15));} while(false)
+
 
 /**
  * returns gpio port code for the given GPIO base address
