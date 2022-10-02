@@ -29,5 +29,53 @@ typedef struct {
     SPI_Config_t SPI_Config;
 } SPI_Handle_t;
 
+/**
+ * @SPI_DeviceModes
+ * */
+#define SPI_DeviceMode_SLAVE        0
+#define SPI_DeviceMode_MASTER       1
+
+/**
+ * @SPI_BusConfig
+ * */
+#define SPI_BusConfig_FD                    1   // Full Duplex
+#define SPI_BusConfig_HD                    2   // Half Duplex
+#define SPI_BusConfig_SIMPLEX_RXONLY        3   // Simplex RX only
+
+/**
+ * @SPI_ClkSpeed
+ * */
+#define SPI_SCLK_SPEED_DIV_2        0
+#define SPI_SCLK_SPEED_DIV_4        1
+#define SPI_SCLK_SPEED_DIV_8        2
+#define SPI_SCLK_SPEED_DIV_16       3
+#define SPI_SCLK_SPEED_DIV_32       4
+#define SPI_SCLK_SPEED_DIV_64       5
+#define SPI_SCLK_SPEED_DIV_128      6
+#define SPI_SCLK_SPEED_DIV_256      7
+
+/**
+ * @SPI_DFF
+ * */
+#define SPI_DFF_8BITS       0
+#define SPI_DFF_16BITS      1
+
+/**
+ * @SPI_CPOL
+ * */
+#define SPI_CPOL_LOW        0
+#define SPI_CPOL_HIGH       1
+
+/**
+ * @SPI_CPHA
+ * */
+#define SPI_CPHA_LOW        0
+#define SPI_CPHA_HIGH       1
+
+/**
+ * @SPI_SSM
+ * */
+#define SPI_SSM_EN          1
+#define SPI_SSM_DI          0
 
 #endif //STM32F1XX_DRIVERS_STM32F103XX_SPI_DRIVER_H
